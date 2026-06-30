@@ -1,0 +1,17 @@
+spring:
+    security:
+        oauth2:
+            client:
+                provider:
+                    fint-idp:
+                        token-uri: https://idp.felleskomponent.no/nidp/oauth/nam/token?resourceServer=fint-api
+                registration:
+                    file-service:
+                        authorization-grant-type: client_credentials
+                        provider: fint-idp
+                        client-id: ${fint.sso.client-id}
+                        client-secret: ${fint.sso.client-secret}
+
+novari:
+    flyt:
+        file-service-url: 'http://fint-flyt-file-service:8080'

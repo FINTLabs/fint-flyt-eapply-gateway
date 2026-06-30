@@ -1,0 +1,69 @@
+apiVersion: fintlabs.no/v1alpha1
+kind: Application
+metadata:
+    name: fint-flyt-example-gateway
+    namespace: fintlabs-no
+    labels:
+        app.kubernetes.io/name: fint-flyt-example-gateway
+        app.kubernetes.io/instance: fint-flyt-example-gateway_fintlabs_no
+        app.kubernetes.io/version: latest
+        app.kubernetes.io/component: backend
+        app.kubernetes.io/part-of: fint-flyt
+        fintlabs.no/team: flyt
+        fintlabs.no/org-id: fintlabs.no
+spec:
+    port: 8080
+    imagePullPolicy: Always
+    orgId: fintlabs.no
+    image: ghcr.io/fintlabs/fint-flyt-example-gateway:sha-0000000
+    kafka:
+        enabled: true
+        acls:
+            -   permission: admin
+                topic: 'no-permission'
+    url:
+        hostname: flyt.vigoiks.no
+        basePath: ""
+    ingress:
+        enabled: true
+        basePath: path
+    env:
+        -   name: JAVA_TOOL_OPTIONS
+            value: '-XX:+ExitOnOutOfMemoryError -Xmx700M'
+    envFrom:
+        -   secretRef:
+                name: fint-flyt-file-oauth2-client
+    resources:
+        limits:
+            memory: "750Mi"
+            cpu: "500m"
+        requests:
+            memory: "512Mi"
+            cpu: "100m"
+    probes:
+        startup:
+            path: /
+            port: 8080
+            initialDelaySeconds: 70
+            failureThreshold: 12
+            periodSeconds: 10
+            timeoutSeconds: 3
+        readiness:
+            path: /
+            port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+        liveness:
+            path: /
+            port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+    restartPolicy: Always
+    replicas: 1
+    strategy:
+        type: RollingUpdate
+        rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }

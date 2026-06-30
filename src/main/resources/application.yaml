@@ -1,0 +1,24 @@
+fint:
+    application-id: fint-flyt-example-gateway
+
+logging:
+    level:
+        no.novari.cache.ehcache.FintEhCacheEventLogger: WARN
+        no.novari.flyt.webresourceserver: DEBUG
+
+server:
+    error:
+        include-message: always
+    max-http-request-header-size: 40KB
+
+spring:
+    profiles:
+        include:
+            - flyt-kafka
+            - flyt-logging
+            - flyt-web-resource-server
+            - flyt-file-client
+
+    output:
+        ansi:
+            enabled: always
