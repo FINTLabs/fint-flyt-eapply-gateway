@@ -1,4 +1,4 @@
-package no.novari.flyt.example.gateway.instance.model
+package no.novari.flyt.eapply.gateway.instance.model
 
 data class SimpleExample(
     val sysId: String,

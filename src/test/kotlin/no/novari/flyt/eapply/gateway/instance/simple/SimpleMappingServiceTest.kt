@@ -1,6 +1,6 @@
-package no.novari.flyt.example.gateway.instance.simple
+package no.novari.flyt.eapply.gateway.instance.simple
 
-import no.novari.flyt.example.gateway.instance.model.SimpleExample
+import no.novari.flyt.eapply.gateway.instance.model.SimpleExample
 import no.novari.flyt.gateway.webinstance.model.File
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue

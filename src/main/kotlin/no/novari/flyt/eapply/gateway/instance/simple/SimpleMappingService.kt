@@ -1,7 +1,7 @@
-package no.novari.flyt.example.gateway.instance.simple
+package no.novari.flyt.eapply.gateway.instance.simple
 
-import no.novari.flyt.example.gateway.instance.mapping.putOrEmpty
-import no.novari.flyt.example.gateway.instance.model.SimpleExample
+import no.novari.flyt.eapply.gateway.instance.mapping.putOrEmpty
+import no.novari.flyt.eapply.gateway.instance.model.SimpleExample
 import no.novari.flyt.gateway.webinstance.InstanceMapper
 import no.novari.flyt.gateway.webinstance.model.File
 import no.novari.flyt.gateway.webinstance.model.instance.InstanceObject

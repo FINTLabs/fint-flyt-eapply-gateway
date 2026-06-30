@@ -1,5 +1,5 @@
 fint:
-    application-id: fint-flyt-example-gateway
+    application-id: fint-flyt-eapply-gateway
 
 logging:
     level:

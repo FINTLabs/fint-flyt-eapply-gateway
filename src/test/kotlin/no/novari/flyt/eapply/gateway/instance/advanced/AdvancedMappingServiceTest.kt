@@ -1,9 +1,9 @@
-package no.novari.flyt.example.gateway.instance.advanced
+package no.novari.flyt.eapply.gateway.instance.advanced
 
-import no.novari.flyt.example.gateway.instance.model.AdvancedExample
-import no.novari.flyt.example.gateway.instance.model.Dokument
-import no.novari.flyt.example.gateway.instance.model.Filinnhold
-import no.novari.flyt.example.gateway.instance.model.Saksbehandler
+import no.novari.flyt.eapply.gateway.instance.model.AdvancedExample
+import no.novari.flyt.eapply.gateway.instance.model.Dokument
+import no.novari.flyt.eapply.gateway.instance.model.Filinnhold
+import no.novari.flyt.eapply.gateway.instance.model.Saksbehandler
 import no.novari.flyt.gateway.webinstance.model.File
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue

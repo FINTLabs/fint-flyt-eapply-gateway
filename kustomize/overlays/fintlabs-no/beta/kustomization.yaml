@@ -7,7 +7,7 @@ resources:
 
 labels:
     -   pairs:
-            app.kubernetes.io/instance: fint-flyt-example-gateway_fintlabs_no
+            app.kubernetes.io/instance: fint-flyt-eapply-gateway_fintlabs_no
             fintlabs.no/org-id: fintlabs.no
 
 patches:
@@ -42,4 +42,4 @@ patches:
                     value: "/beta/fintlabs-no"
         target:
             kind: Application
-            name: fint-flyt-example-gateway
+            name: fint-flyt-eapply-gateway

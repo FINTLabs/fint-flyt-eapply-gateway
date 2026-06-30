@@ -12,7 +12,7 @@ Customize this template for your source system before deployment.
 
 ### Rename and adjust template identifiers
 Update template names and identifiers so they match your source application:
-- Rename project/artifact names such as `fint-flyt-example-gateway`.
+- Rename project/artifact names such as `fint-flyt-eapply-gateway`.
 - Update `fint.application-id` in `src/main/resources/application.yaml`.
 - Update metadata and image values in `kustomize/base/flais.yaml`.
 
@@ -65,7 +65,7 @@ Run this gateway with local profile:
 
 ## Dependencies
 This template depends on:
-- `no.novari:flyt-web-instance-gateway:1.3.6`
+- `no.novari:flyt-web-instance-gateway:2.2.0`
 
 ## Additional Documentation
 For more details on FINT Flyt architecture and setup, see:

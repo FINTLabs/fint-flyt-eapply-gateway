@@ -1,6 +1,6 @@
-package no.novari.flyt.example.gateway.instance.advanced
+package no.novari.flyt.eapply.gateway.instance.advanced
 
-import no.novari.flyt.example.gateway.instance.model.AdvancedExample
+import no.novari.flyt.eapply.gateway.instance.model.AdvancedExample
 import no.novari.flyt.gateway.webinstance.InstanceProcessor
 import no.novari.flyt.gateway.webinstance.InstanceProcessorFactoryService
 import org.springframework.context.annotation.Bean

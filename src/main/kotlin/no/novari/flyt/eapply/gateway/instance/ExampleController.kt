@@ -1,8 +1,8 @@
-package no.novari.flyt.example.gateway.instance
+package no.novari.flyt.eapply.gateway.instance
 
-import no.novari.flyt.example.gateway.instance.model.AdvancedExample
-import no.novari.flyt.example.gateway.instance.model.SimpleExample
-import no.novari.flyt.example.gateway.instance.model.SimpleExampleStatus
+import no.novari.flyt.eapply.gateway.instance.model.AdvancedExample
+import no.novari.flyt.eapply.gateway.instance.model.SimpleExample
+import no.novari.flyt.eapply.gateway.instance.model.SimpleExampleStatus
 import no.novari.flyt.gateway.webinstance.InstanceProcessor
 import no.novari.flyt.webresourceserver.UrlPaths.EXTERNAL_API
 import org.springframework.beans.factory.annotation.Qualifier
