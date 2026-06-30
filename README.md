@@ -57,7 +57,7 @@ Run this gateway with local profile:
 ```
 
 ## Technology
-- Spring Boot 3.5.14
+- Spring Boot 3.5.15
 - Java 25
 - Kotlin 2.4.0
 - ktlint
