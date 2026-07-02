@@ -37,6 +37,10 @@ jobs:
             - name: Derive lowercase image name
               run: echo "IMAGE_NAME=$(echo "$GITHUB_REPOSITORY" | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_ENV"
 
+            - name: Determine image reference
+              id: image
+              run: echo "image=${REGISTRY}/${IMAGE_NAME}:${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+
             - name: Log in to GHCR
               uses: docker/login-action@v4
               with:
@@ -45,7 +49,7 @@ jobs:
                   password: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Pull image
-              run: docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.workflow_run.head_sha }}
+              run: docker pull ${{ steps.image.outputs.image }}
 
             - name: Determine environment
               id: environment
@@ -61,12 +65,20 @@ jobs:
                   script: return 'rg-aks-${{ steps.environment.outputs.result }}';
                   result-encoding: string
 
+            - name: Set deployment image
+              run: |
+                  sed -i "s#^\([[:space:]]*image:\).*#\1 ${{ steps.image.outputs.image }}#" kustomize/base/flais.yaml
+                  grep -q "image: ${{ steps.image.outputs.image }}" kustomize/base/flais.yaml
+
             - name: Bake manifests
               id: bake
               uses: azure/k8s-bake@v4
               with:
                   renderEngine: kustomize
                   kustomizationPath: kustomize/overlays/${{ matrix.org }}/${{ steps.environment.outputs.result }}
+
+            - name: Verify baked image
+              run: grep -R "${{ steps.image.outputs.image }}" "${{ steps.bake.outputs.manifestsBundle }}"
 
             - name: Azure login
               uses: azure/login@v2
@@ -91,5 +103,5 @@ jobs:
               with:
                   action: deploy
                   manifests: ${{ steps.bake.outputs.manifestsBundle }}
-                  images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.workflow_run.head_sha }}
+                  images: ${{ steps.image.outputs.image }}
                   namespace: ${{ matrix.org }}

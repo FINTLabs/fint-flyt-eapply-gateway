@@ -99,6 +99,14 @@ jobs:
                   images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
                   tags: type=sha,enable=true,priority=100,prefix=sha-,suffix=,format=short
 
+            - name: Determine image reference
+              id: image
+              env:
+                  TAGS: ${{ steps.meta.outputs.tags }}
+              run: |
+                  image="$(printf '%s\n' "$TAGS" | head -n 1)"
+                  echo "image=$image" >> "$GITHUB_OUTPUT"
+
             - name: Build & Push Docker image
               uses: docker/build-push-action@v7
               with:
@@ -107,12 +115,20 @@ jobs:
                   tags: ${{ steps.meta.outputs.tags }}
                   labels: ${{ steps.meta.outputs.labels }}
 
+            - name: Set deployment image
+              run: |
+                  sed -i "s#^\([[:space:]]*image:\).*#\1 ${{ steps.image.outputs.image }}#" kustomize/base/flais.yaml
+                  grep -q "image: ${{ steps.image.outputs.image }}" kustomize/base/flais.yaml
+
             - name: Bake manifests
               id: bake
               uses: azure/k8s-bake@v4
               with:
                   renderEngine: kustomize
                   kustomizationPath: kustomize/overlays/${{ env.ORG }}/${{ steps.environment.outputs.result }}
+
+            - name: Verify baked image
+              run: grep -R "${{ steps.image.outputs.image }}" "${{ steps.bake.outputs.manifestsBundle }}"
 
             - name: Determine secret name
               id: secretname
@@ -142,5 +158,5 @@ jobs:
               with:
                   action: deploy
                   manifests: ${{ steps.bake.outputs.manifestsBundle }}
-                  images: ${{ steps.meta.outputs.tags }}
+                  images: ${{ steps.image.outputs.image }}
                   namespace: ${{ env.ORG }}
