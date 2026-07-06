@@ -74,8 +74,6 @@ for org_slug in "${ORG_SLUGS[@]}"; do
     export READINESS_PATH="${base_path}/actuator/health/readiness"
     export LIVENESS_PATH="${base_path}/actuator/health/liveness"
     export FINT_KAFKA_TOPIC_ORGID="$org_slug"
-    export ITEM_PATH="vaults/${vault_name}/items/fint-flyt-eapply-oauth2-client-${org_slug}"
-
     target_dir="$ROOT/kustomize/overlays/$org_slug/$environment"
     mkdir -p "$target_dir"
 

@@ -47,10 +47,3 @@ patches:
     target:
       kind: Application
       name: fint-flyt-eapply-gateway
-  - patch: |-
-      - op: add
-        path: "/spec/itemPath"
-        value: "vaults/aks-beta-vault/items/fint-flyt-eapply-oauth2-client-ofk-no"
-    target:
-      kind: OnePasswordItem
-      name: fint-flyt-eapply-oauth2-client
