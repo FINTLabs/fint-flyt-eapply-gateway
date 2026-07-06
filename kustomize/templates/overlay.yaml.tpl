@@ -1,56 +1,56 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: fintlabs-no
+namespace: $NAMESPACE
 
 resources:
   - ../../../base
 
 labels:
   - pairs:
-      app.kubernetes.io/instance: fint-flyt-eapply-gateway_fintlabs_no
-      fintlabs.no/org-id: fintlabs.no
+      app.kubernetes.io/instance: $APP_INSTANCE_LABEL
+      fintlabs.no/org-id: $ORG_ID_DOT
 
 patches:
   - patch: |-
       - op: replace
         path: "/spec/kafka/acls/0/topic"
-        value: "fintlabs-no.flyt.*"
+        value: "$KAFKA_TOPIC"
       - op: replace
         path: "/spec/orgId"
-        value: "fintlabs.no"
+        value: "$ORG_ID_DOT"
       - op: add
         path: "/spec/imagePullSecrets"
         value:
           - ghcr
       - op: replace
         path: "/spec/ingress/basePath"
-        value: "/beta/fintlabs-no/api/eapply"
+        value: "$INGRESS_BASE_PATH"
       - op: replace
         path: "/spec/probes/startup/path"
-        value: "/beta/fintlabs-no/actuator/health"
+        value: "$STARTUP_PATH"
       - op: replace
         path: "/spec/probes/readiness/path"
-        value: "/beta/fintlabs-no/actuator/health/readiness"
+        value: "$READINESS_PATH"
       - op: replace
         path: "/spec/probes/liveness/path"
-        value: "/beta/fintlabs-no/actuator/health/liveness"
+        value: "$LIVENESS_PATH"
       - op: add
         path: "/spec/env/-"
         value:
           name: novari.kafka.topic.org-id
-          value: "fintlabs-no"
+          value: "$FINT_KAFKA_TOPIC_ORGID"
       - op: add
         path: "/spec/env/-"
         value:
           name: server.servlet.context-path
-          value: "/beta/fintlabs-no"
+          value: "$BASE_PATH"
     target:
       kind: Application
       name: fint-flyt-eapply-gateway
   - patch: |-
       - op: add
         path: "/spec/itemPath"
-        value: "vaults/aks-beta-vault/items/fint-flyt-eapply-oauth2-client-fintlabs-no"
+        value: "$ITEM_PATH"
     target:
       kind: OnePasswordItem
       name: fint-flyt-eapply-oauth2-client
