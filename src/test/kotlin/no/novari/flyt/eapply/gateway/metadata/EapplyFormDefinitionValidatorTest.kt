@@ -1,9 +1,9 @@
 package no.novari.flyt.eapply.gateway.metadata
 
 import jakarta.validation.Validation
-import no.novari.flyt.eapply.gateway.metadata.model.eapply.EapplyFormDefinition
-import no.novari.flyt.eapply.gateway.metadata.model.eapply.EapplyFormElement
-import no.novari.flyt.eapply.gateway.metadata.model.eapply.EapplyFormMetadata
+import no.novari.flyt.eapply.gateway.metadata.model.EapplyFormDefinition
+import no.novari.flyt.eapply.gateway.metadata.model.EapplyFormElement
+import no.novari.flyt.eapply.gateway.metadata.model.EapplyFormMetadata
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test

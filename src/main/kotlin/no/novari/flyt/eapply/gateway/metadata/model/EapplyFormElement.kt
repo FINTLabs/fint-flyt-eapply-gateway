@@ -1,4 +1,4 @@
-package no.novari.flyt.eapply.gateway.metadata.model.eapply
+package no.novari.flyt.eapply.gateway.metadata.model
 
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank

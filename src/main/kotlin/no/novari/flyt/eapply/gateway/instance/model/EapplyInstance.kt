@@ -1,14 +1,14 @@
-package no.novari.flyt.eapply.gateway.metadata.model.eapply
+package no.novari.flyt.eapply.gateway.instance.model
 
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 
-data class EapplyFormDefinition(
+data class EapplyInstance(
     @field:NotNull
     @field:Valid
-    val metadata: EapplyFormMetadata? = null,
+    val metadata: EapplyInstanceMetadata? = null,
     @field:NotEmpty
     @field:Valid
-    val elements: List<@Valid EapplyFormElement>? = null,
+    val elements: List<@Valid EapplyInstanceElement>? = null,
 )

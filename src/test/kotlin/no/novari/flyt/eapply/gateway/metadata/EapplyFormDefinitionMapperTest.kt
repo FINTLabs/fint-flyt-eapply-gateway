@@ -1,13 +1,13 @@
 package no.novari.flyt.eapply.gateway.metadata
 
-import no.novari.flyt.eapply.gateway.metadata.model.eapply.EapplyFormDefinition
-import no.novari.flyt.eapply.gateway.metadata.model.eapply.EapplyFormElement
-import no.novari.flyt.eapply.gateway.metadata.model.eapply.EapplyFormMetadata
-import no.novari.flyt.eapply.gateway.metadata.model.fint.InstanceMetadataCategory
-import no.novari.flyt.eapply.gateway.metadata.model.fint.InstanceMetadataContent
-import no.novari.flyt.eapply.gateway.metadata.model.fint.InstanceObjectCollectionMetadata
-import no.novari.flyt.eapply.gateway.metadata.model.fint.InstanceValueMetadata
-import no.novari.flyt.eapply.gateway.metadata.model.fint.IntegrationMetadata
+import no.novari.flyt.eapply.gateway.metadata.model.EapplyFormDefinition
+import no.novari.flyt.eapply.gateway.metadata.model.EapplyFormElement
+import no.novari.flyt.eapply.gateway.metadata.model.EapplyFormMetadata
+import no.novari.flyt.gateway.metadata.model.InstanceMetadataCategory
+import no.novari.flyt.gateway.metadata.model.InstanceMetadataContent
+import no.novari.flyt.gateway.metadata.model.InstanceObjectCollectionMetadata
+import no.novari.flyt.gateway.metadata.model.InstanceValueMetadata
+import no.novari.flyt.gateway.metadata.model.IntegrationMetadata
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -79,7 +79,7 @@ class EapplyFormDefinitionMapperTest {
                                 listOf(
                                     stringElement("fileName", "Filnavn"),
                                     stringElement("mediaType", "MIME-type"),
-                                    fileElement("base64", "Filinnhold"),
+                                    fileElement("file", "Filinnhold"),
                                 ),
                         ),
                         group(
@@ -90,7 +90,7 @@ class EapplyFormDefinitionMapperTest {
                                 listOf(
                                     stringElement("fileName", "Filnavn"),
                                     stringElement("mediaType", "MIME-type"),
-                                    fileElement("base64", "Filinnhold"),
+                                    fileElement("file", "Filinnhold"),
                                 ),
                         ),
                     ),
@@ -124,7 +124,7 @@ class EapplyFormDefinitionMapperTest {
                                                 listOf(
                                                     stringValue("fileName", "Filnavn"),
                                                     stringValue("mediaType", "MIME-type"),
-                                                    fileValue("base64", "Filinnhold"),
+                                                    fileValue("file", "Filinnhold"),
                                                 ),
                                         ),
                                 ),
@@ -139,7 +139,7 @@ class EapplyFormDefinitionMapperTest {
                                                 listOf(
                                                     stringValue("MainDocument.fileName", "Filnavn"),
                                                     stringValue("MainDocument.mediaType", "MIME-type"),
-                                                    fileValue("MainDocument.base64", "Filinnhold"),
+                                                    fileValue("MainDocument.file", "Filinnhold"),
                                                 ),
                                         ),
                                 ),

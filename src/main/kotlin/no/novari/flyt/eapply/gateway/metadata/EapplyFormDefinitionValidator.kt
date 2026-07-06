@@ -2,26 +2,27 @@ package no.novari.flyt.eapply.gateway.metadata
 
 import jakarta.validation.Validator
 import jakarta.validation.ValidatorFactory
-import no.novari.flyt.eapply.gateway.metadata.model.eapply.EapplyFormDefinition
-import no.novari.flyt.eapply.gateway.metadata.model.eapply.EapplyFormElement
+import no.novari.flyt.eapply.gateway.metadata.model.EapplyFormDefinition
+import no.novari.flyt.eapply.gateway.metadata.model.EapplyFormElement
+import no.novari.flyt.gateway.metadata.IntegrationMetadataValidator
 import org.springframework.stereotype.Service
 
 @Service
 class EapplyFormDefinitionValidator(
     validatorFactory: ValidatorFactory,
-) {
+) : IntegrationMetadataValidator<EapplyFormDefinition> {
     private val fieldValidator: Validator = validatorFactory.validator
 
-    fun validate(eapplyFormDefinition: EapplyFormDefinition): List<String>? {
+    override fun validate(incomingMetadata: EapplyFormDefinition): List<String>? {
         val errors =
             fieldValidator
-                .validate(eapplyFormDefinition)
+                .validate(incomingMetadata)
                 .map { constraintViolation ->
                     "${constraintViolation.propertyPath} ${constraintViolation.message}"
                 }.sorted()
                 .toMutableList()
 
-        errors += validateElements(eapplyFormDefinition.elements.orEmpty())
+        errors += validateElements(incomingMetadata.elements.orEmpty())
 
         return errors.takeIf { it.isNotEmpty() }
     }

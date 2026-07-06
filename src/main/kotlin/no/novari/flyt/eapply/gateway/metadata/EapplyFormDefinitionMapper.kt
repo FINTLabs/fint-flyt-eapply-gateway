@@ -1,21 +1,22 @@
 package no.novari.flyt.eapply.gateway.metadata
 
-import no.novari.flyt.eapply.gateway.metadata.model.eapply.EapplyFormDefinition
-import no.novari.flyt.eapply.gateway.metadata.model.eapply.EapplyFormElement
-import no.novari.flyt.eapply.gateway.metadata.model.fint.InstanceMetadataCategory
-import no.novari.flyt.eapply.gateway.metadata.model.fint.InstanceMetadataContent
-import no.novari.flyt.eapply.gateway.metadata.model.fint.InstanceObjectCollectionMetadata
-import no.novari.flyt.eapply.gateway.metadata.model.fint.InstanceValueMetadata
-import no.novari.flyt.eapply.gateway.metadata.model.fint.IntegrationMetadata
+import no.novari.flyt.eapply.gateway.metadata.model.EapplyFormDefinition
+import no.novari.flyt.eapply.gateway.metadata.model.EapplyFormElement
+import no.novari.flyt.gateway.metadata.IntegrationMetadataMapper
+import no.novari.flyt.gateway.metadata.model.InstanceMetadataCategory
+import no.novari.flyt.gateway.metadata.model.InstanceMetadataContent
+import no.novari.flyt.gateway.metadata.model.InstanceObjectCollectionMetadata
+import no.novari.flyt.gateway.metadata.model.InstanceValueMetadata
+import no.novari.flyt.gateway.metadata.model.IntegrationMetadata
 import org.springframework.stereotype.Service
 
 @Service
-class EapplyFormDefinitionMapper {
-    fun toIntegrationMetadata(
+class EapplyFormDefinitionMapper : IntegrationMetadataMapper<EapplyFormDefinition> {
+    override fun toIntegrationMetadata(
         sourceApplicationId: Long,
-        eapplyFormDefinition: EapplyFormDefinition,
+        incomingMetadata: EapplyFormDefinition,
     ): IntegrationMetadata {
-        val metadata = requireNotNull(eapplyFormDefinition.metadata)
+        val metadata = requireNotNull(incomingMetadata.metadata)
 
         return IntegrationMetadata(
             sourceApplicationId = sourceApplicationId,
@@ -23,7 +24,7 @@ class EapplyFormDefinitionMapper {
             sourceApplicationIntegrationUri = null,
             integrationDisplayName = requireNotNull(metadata.formDisplayName),
             version = metadata.version,
-            instanceMetadata = toMetadataContent(eapplyFormDefinition.elements.orEmpty()),
+            instanceMetadata = toMetadataContent(incomingMetadata.elements.orEmpty()),
         )
     }
 
