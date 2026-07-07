@@ -17,24 +17,9 @@ class EapplyIntegrationMetadataController(
     private val eapplyFormDefinitionValidator: EapplyFormDefinitionValidator,
     private val integrationMetadataProcessor: IntegrationMetadataProcessor,
 ) {
-    @PostMapping("/cases")
-    fun postCaseMetadata(
+    @PostMapping
+    fun postMetadata(
         @RequestBody eapplyFormDefinition: EapplyFormDefinition,
-        authentication: Authentication,
-    ): ResponseEntity<Void> {
-        return postIntegrationMetadata(eapplyFormDefinition, authentication)
-    }
-
-    @PostMapping("/journalposts")
-    fun postJournalpostMetadata(
-        @RequestBody eapplyFormDefinition: EapplyFormDefinition,
-        authentication: Authentication,
-    ): ResponseEntity<Void> {
-        return postIntegrationMetadata(eapplyFormDefinition, authentication)
-    }
-
-    private fun postIntegrationMetadata(
-        eapplyFormDefinition: EapplyFormDefinition,
         authentication: Authentication,
     ): ResponseEntity<Void> {
         return integrationMetadataProcessor.processIntegrationMetadata(

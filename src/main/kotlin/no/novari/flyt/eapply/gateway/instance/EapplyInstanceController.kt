@@ -21,10 +21,9 @@ class EapplyInstanceController(
     private val eapplyInstanceProcessor: MultipartInstanceProcessor<EapplyInstance>,
 ) {
     @PostMapping(
-        "/cases",
         consumes = [MediaType.APPLICATION_JSON_VALUE],
     )
-    fun postCaseInstance(
+    fun postInstance(
         @Valid @RequestBody eapplyInstance: EapplyInstance,
         authentication: Authentication,
     ): ResponseEntity<Void> {
@@ -32,31 +31,10 @@ class EapplyInstanceController(
     }
 
     @PostMapping(
-        "/cases",
         consumes = [MediaType.MULTIPART_FORM_DATA_VALUE],
     )
-    fun postCaseInstance(
+    fun postMultipartInstance(
         @Valid @RequestPart("instance") eapplyInstance: EapplyInstance,
-        multipartRequest: MultipartHttpServletRequest,
-        authentication: Authentication,
-    ): ResponseEntity<Void> {
-        return postMultipartInstance(eapplyInstance, multipartRequest, authentication)
-    }
-
-    @PostMapping(
-        "/journalposts",
-        consumes = [MediaType.MULTIPART_FORM_DATA_VALUE],
-    )
-    fun postJournalpostInstance(
-        @Valid @RequestPart("instance") eapplyInstance: EapplyInstance,
-        multipartRequest: MultipartHttpServletRequest,
-        authentication: Authentication,
-    ): ResponseEntity<Void> {
-        return postMultipartInstance(eapplyInstance, multipartRequest, authentication)
-    }
-
-    private fun postMultipartInstance(
-        eapplyInstance: EapplyInstance,
         multipartRequest: MultipartHttpServletRequest,
         authentication: Authentication,
     ): ResponseEntity<Void> {
