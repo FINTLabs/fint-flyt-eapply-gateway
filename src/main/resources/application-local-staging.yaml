@@ -13,4 +13,4 @@ spring:
     kafka:
         bootstrap-servers: localhost:9092
 server:
-    port: 8199 # this should be changed to reflects this applications sourceapplication id. if the id is 9, the local port should be 8109
+    port: 8110 # this should be changed to reflects this applications sourceapplication id. if the id is 9, the local port should be 8109
