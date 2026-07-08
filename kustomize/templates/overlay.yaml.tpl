@@ -18,10 +18,6 @@ patches:
       - op: replace
         path: "/spec/orgId"
         value: "$ORG_ID_DOT"
-      - op: add
-        path: "/spec/imagePullSecrets"
-        value:
-          - ghcr
       - op: replace
         path: "/spec/ingress/basePath"
         value: "$INGRESS_BASE_PATH"
