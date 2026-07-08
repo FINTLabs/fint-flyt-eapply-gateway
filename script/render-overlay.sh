@@ -8,7 +8,6 @@ ORG_SLUGS=(
   "afk-no"
   "agderfk-no"
   "bfk-no"
-  "bym-oslo-kommune-no"
   "ffk-no"
   "fintlabs-no"
   "innlandetfylke-no"
@@ -31,7 +30,7 @@ supports_environment() {
     fintlabs-no)
       [[ "$environment" == "beta" ]]
       ;;
-    bym-oslo-kommune-no|mrfylke-no|nfk-no)
+    mrfylke-no|nfk-no)
       [[ "$environment" == "api" ]]
       ;;
     *)
