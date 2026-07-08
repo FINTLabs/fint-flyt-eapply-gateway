@@ -222,3 +222,4 @@ GitHub Actions:
 - `CD.yaml` deployer etter fullført CI på `main`.
 - `MD.yaml` kan brukes til manuell deploy.
 
+
