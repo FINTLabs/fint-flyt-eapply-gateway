@@ -1,0 +1,49 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: agderfk-no
+
+resources:
+  - ../../../base
+
+labels:
+  - pairs:
+      app.kubernetes.io/instance: fint-flyt-eapply-gateway_agderfk_no
+      fintlabs.no/org-id: agderfk.no
+
+patches:
+  - patch: |-
+      - op: replace
+        path: "/spec/kafka/acls/0/topic"
+        value: "agderfk-no.flyt.*"
+      - op: replace
+        path: "/spec/orgId"
+        value: "agderfk.no"
+      - op: add
+        path: "/spec/imagePullSecrets"
+        value:
+          - ghcr
+      - op: replace
+        path: "/spec/ingress/basePath"
+        value: "/beta/agderfk-no/api/eapply"
+      - op: replace
+        path: "/spec/probes/startup/path"
+        value: "/beta/agderfk-no/actuator/health"
+      - op: replace
+        path: "/spec/probes/readiness/path"
+        value: "/beta/agderfk-no/actuator/health/readiness"
+      - op: replace
+        path: "/spec/probes/liveness/path"
+        value: "/beta/agderfk-no/actuator/health/liveness"
+      - op: add
+        path: "/spec/env/-"
+        value:
+          name: novari.kafka.topic.org-id
+          value: "agderfk-no"
+      - op: add
+        path: "/spec/env/-"
+        value:
+          name: server.servlet.context-path
+          value: "/beta/agderfk-no"
+    target:
+      kind: Application
+      name: fint-flyt-eapply-gateway

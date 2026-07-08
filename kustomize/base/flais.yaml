@@ -1,11 +1,11 @@
 apiVersion: fintlabs.no/v1alpha1
 kind: Application
 metadata:
-    name: fint-flyt-example-gateway
+    name: fint-flyt-eapply-gateway
     namespace: fintlabs-no
     labels:
-        app.kubernetes.io/name: fint-flyt-example-gateway
-        app.kubernetes.io/instance: fint-flyt-example-gateway_fintlabs_no
+        app.kubernetes.io/name: fint-flyt-eapply-gateway
+        app.kubernetes.io/instance: fint-flyt-eapply-gateway_fintlabs_no
         app.kubernetes.io/version: latest
         app.kubernetes.io/component: backend
         app.kubernetes.io/part-of: fint-flyt
@@ -15,7 +15,7 @@ spec:
     port: 8080
     imagePullPolicy: Always
     orgId: fintlabs.no
-    image: ghcr.io/fintlabs/fint-flyt-example-gateway:sha-0000000
+    image: ghcr.io/fintlabs/fint-flyt-eapply-gateway:sha-0000000
     kafka:
         enabled: true
         acls:

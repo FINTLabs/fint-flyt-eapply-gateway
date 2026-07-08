@@ -5,4 +5,4 @@ novari:
                 api:
                     external:
                         enabled: true
-                        authorized-source-application-ids: 99 #replace this with the actual source application ID this application gets from fint-flyt-authorization-service
+                        authorized-source-application-ids: 10
