@@ -221,3 +221,4 @@ GitHub Actions:
 - `CI.yaml` bygger og tester pull requests og `main`.
 - `CD.yaml` deployer etter fullført CI på `main`.
 - `MD.yaml` kan brukes til manuell deploy.
+

@@ -18,10 +18,6 @@ patches:
       - op: replace
         path: "/spec/orgId"
         value: "rogfk.no"
-      - op: add
-        path: "/spec/imagePullSecrets"
-        value:
-          - ghcr
       - op: replace
         path: "/spec/ingress/basePath"
         value: "/beta/rogfk-no/api/eapply"
