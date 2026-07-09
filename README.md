@@ -104,6 +104,8 @@ Content-Type: multipart/form-data
 
 Multipart-kallet må inneholde en part med navn `instance`, som er samme JSON-struktur som vanlig instansmottak. Filreferanser i instansen kobles mot multipart-filer via `partName`.
 
+`instance`-parten kan sendes som en JSON-filpart eller som tekstfelt. Endepunktet parser innholdet som JSON uavhengig av om klienten setter partens `Content-Type` til `application/json`, `text/plain` eller `application/octet-stream`.
+
 Eksempel på filreferanse i `elements.value`:
 
 ```json
@@ -221,4 +223,3 @@ GitHub Actions:
 - `CI.yaml` bygger og tester pull requests og `main`.
 - `CD.yaml` deployer etter fullført CI på `main`.
 - `MD.yaml` kan brukes til manuell deploy.
-
