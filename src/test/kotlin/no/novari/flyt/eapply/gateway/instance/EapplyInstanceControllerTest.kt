@@ -5,15 +5,11 @@ import jakarta.validation.Validation
 import no.novari.flyt.eapply.gateway.instance.model.EapplyInstance
 import no.novari.flyt.gateway.instance.MultipartInstanceProcessor
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
-import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.anyCollection
-import org.mockito.ArgumentMatchers.eq
+import org.mockito.Answers
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.`when`
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -24,9 +20,23 @@ import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.server.ResponseStatusException
 
 class EapplyInstanceControllerTest {
+    private var processedAuthentication: Authentication? = null
+    private var processedInstance: EapplyInstance? = null
+    private var processedMultipartFiles: Collection<MultipartFile>? = null
+
     @Suppress("UNCHECKED_CAST")
     private val eapplyInstanceProcessor =
-        mock(MultipartInstanceProcessor::class.java) as MultipartInstanceProcessor<EapplyInstance>
+        mock(MultipartInstanceProcessor::class.java) { invocation ->
+            if (invocation.method.name == "processInstance" && invocation.arguments.firstOrNull() is Authentication) {
+                processedAuthentication = invocation.getArgument(0)
+                processedInstance = invocation.getArgument(1)
+                processedMultipartFiles = invocation.getArgument(2)
+                ResponseEntity.ok().build<Void>()
+            } else {
+                Answers.RETURNS_DEFAULTS.answer(invocation)
+            }
+        } as MultipartInstanceProcessor<EapplyInstance>
+
     private val eapplyCaseStatusService = mock(EapplyCaseStatusService::class.java)
     private val authentication = mock(Authentication::class.java)
     private val controller =
@@ -39,14 +49,6 @@ class EapplyInstanceControllerTest {
 
     @Test
     fun `parses octet-stream instance part and excludes it from multipart files`() {
-        `when`(
-            eapplyInstanceProcessor.processInstance(
-                any(Authentication::class.java),
-                any(EapplyInstance::class.java),
-                anyCollection(),
-            ),
-        ).thenReturn(ResponseEntity.ok().build())
-
         val request =
             MockMultipartHttpServletRequest().apply {
                 addFile(
@@ -82,20 +84,10 @@ class EapplyInstanceControllerTest {
 
         controller.postMultipartInstance(request, authentication)
 
-        val instanceCaptor = ArgumentCaptor.forClass(EapplyInstance::class.java)
-
-        @Suppress("UNCHECKED_CAST")
-        val filesCaptor = ArgumentCaptor.forClass(Collection::class.java) as ArgumentCaptor<Collection<MultipartFile>>
-
-        verify(eapplyInstanceProcessor).processInstance(
-            eq(authentication),
-            instanceCaptor.capture(),
-            filesCaptor.capture(),
-        )
-
-        assertEquals("eapply-journalpost", instanceCaptor.value.metadata?.formId)
-        assertEquals("instance-123", instanceCaptor.value.metadata?.instanceId)
-        assertEquals(listOf("mainDocument"), filesCaptor.value.map { it.name })
+        assertSame(authentication, processedAuthentication)
+        assertEquals("eapply-journalpost", processedInstance?.metadata?.formId)
+        assertEquals("instance-123", processedInstance?.metadata?.instanceId)
+        assertEquals(listOf("mainDocument"), processedMultipartFiles?.map { it.name })
     }
 
     @Test
