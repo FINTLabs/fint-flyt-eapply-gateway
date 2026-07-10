@@ -31,4 +31,9 @@ class SwaggerSecurityConfig(
     @Order(0)
     fun openApiDocsSecurityFilterChain(http: HttpSecurity): SecurityFilterChain =
         securityFilterChainFactoryService.permitAll(http, "${swaggerBasePath()}/v3/api-docs")
+
+    @Bean
+    @Order(0)
+    fun openApiDocsYamlSecurityFilterChain(http: HttpSecurity): SecurityFilterChain =
+        securityFilterChainFactoryService.permitAll(http, "${swaggerBasePath()}/v3/api-docs.yaml")
 }
