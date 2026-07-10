@@ -22,3 +22,9 @@ spring:
     output:
         ansi:
             enabled: always
+
+springdoc:
+    swagger-ui:
+        path: ${novari.flyt.eapply.swagger.base-path:${novari.flyt.eapply.api.base-path:/api/eapply}}/swagger-ui
+    api-docs:
+        path: ${novari.flyt.eapply.swagger.base-path:${novari.flyt.eapply.api.base-path:/api/eapply}}/v3/api-docs

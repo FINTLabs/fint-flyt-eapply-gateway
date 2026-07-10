@@ -25,7 +25,7 @@ Applikasjonen er en Spring Boot/Kotlin-tjeneste som eksponerer API-er for kildea
 
 Alle eksterne endepunkter ligger under `/api`.
 
-Swagger UI er tilgjengelig på `/swagger-ui.html` når applikasjonen kjører. OpenAPI-spesifikasjonen er tilgjengelig som JSON på `/v3/api-docs` og YAML på `/v3/api-docs.yaml`.
+Swagger UI er tilgjengelig på `/api/eapply/swagger-ui` når applikasjonen kjører. OpenAPI-spesifikasjonen er tilgjengelig som JSON på `/api/eapply/v3/api-docs` og YAML på `/api/eapply/v3/api-docs.yaml`.
 
 ### Metadata
 
