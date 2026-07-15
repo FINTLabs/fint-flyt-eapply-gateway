@@ -39,6 +39,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.17")
 
     implementation("no.novari:flyt-gateway-starter:3.0.0")
+    implementation("no.novari:flyt-web-resource-server:4.0.0-rc-1")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
