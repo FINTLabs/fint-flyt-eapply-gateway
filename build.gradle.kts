@@ -38,7 +38,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.17")
 
-    implementation("no.novari:flyt-gateway-starter:4.0.0-rc-2")
+    implementation("no.novari:flyt-gateway-starter:4.0.0-rc-3")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
