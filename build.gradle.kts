@@ -30,8 +30,8 @@ repositories {
 extra["commons-lang3.version"] = "3.18.0"
 extra["httpclient5.version"] = "5.6.3"
 extra["httpcore5.version"] = "5.4.3"
-extra["jackson-bom.version"] = "2.21.5"
-extra["log4j2.version"] = "2.25.5"
+extra["jackson-bom.version"] = "2.22.2"
+extra["log4j2.version"] = "2.26.1"
 
 dependencies {
     constraints {
