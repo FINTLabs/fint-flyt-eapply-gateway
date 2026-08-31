@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TEMPLATE_PATH="$ROOT/kustomize/templates/overlay.yaml.tpl"
+OTEL_ENDPOINT_BETA="http://alloy.flais-system.svc.cluster.local:4318"
 
 ORG_SLUGS=(
   "afk-no"
@@ -39,6 +40,19 @@ supports_environment() {
   esac
 }
 
+# Base URL without /v1/traces: telemetry-starter appends the signal path.
+# Set manually until flaiserator supports this, and only in beta where Alloy runs.
+build_otel_env_patch() {
+  local environment="$1"
+
+  if [[ "$environment" != "beta" ]]; then
+    return
+  fi
+
+  printf '\n      - op: add\n        path: "/spec/env/-"\n        value:\n          name: "OTEL_EXPORTER_OTLP_ENDPOINT"\n          value: "%s"' \
+    "$OTEL_ENDPOINT_BETA"
+}
+
 for org_slug in "${ORG_SLUGS[@]}"; do
   org_id_dot="${org_slug//-/.}"
   org_id_underscore="${org_slug//-/_}"
@@ -73,6 +87,7 @@ for org_slug in "${ORG_SLUGS[@]}"; do
     export READINESS_PATH="${base_path}/actuator/health/readiness"
     export LIVENESS_PATH="${base_path}/actuator/health/liveness"
     export FINT_KAFKA_TOPIC_ORGID="$org_slug"
+    export OTEL_ENV_PATCH="$(build_otel_env_patch "$environment")"
     target_dir="$ROOT/kustomize/overlays/$org_slug/$environment"
     mkdir -p "$target_dir"
 
