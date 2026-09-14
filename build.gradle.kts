@@ -19,8 +19,8 @@ buildscript {
 plugins {
     id("org.springframework.boot") version "3.5.16"
     id("io.spring.dependency-management") version "1.1.7"
-    kotlin("jvm") version "2.4.10"
-    kotlin("plugin.spring") version "2.4.10"
+    kotlin("jvm") version "2.4.20"
+    kotlin("plugin.spring") version "2.4.20"
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     id("io.github.ben-manes.versions") version "0.61.0"
 }
@@ -64,7 +64,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.9.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.9.1")
 
     implementation("no.novari:flyt-gateway-starter:4.0.0")
 
