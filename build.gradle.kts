@@ -28,6 +28,8 @@ plugins {
 group = "no.novari"
 version = "0.0.1-SNAPSHOT"
 
+var springdocOpenApiVersion = "2.8.17"
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(25))
@@ -64,9 +66,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.9.1")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenApiVersion")
 
-    implementation("no.novari:flyt-gateway-starter:4.0.0")
+    implementation("no.novari:flyt-gateway-starter:4.1.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
