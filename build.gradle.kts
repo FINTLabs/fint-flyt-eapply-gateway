@@ -28,6 +28,8 @@ plugins {
 group = "no.novari"
 version = "0.0.1-SNAPSHOT"
 
+var springdocOpenApiVersion = "2.8.17"
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(25))
