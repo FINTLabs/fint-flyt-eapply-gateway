@@ -22,7 +22,7 @@ plugins {
     kotlin("jvm") version "2.4.10"
     kotlin("plugin.spring") version "2.4.10"
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
-    id("io.github.ben-manes.versions") version "0.61.0"
+    id("io.github.ben-manes.versions") version "0.64.0"
 }
 
 group = "no.novari"
@@ -53,7 +53,7 @@ extra["tomcat.version"] = "10.1.59"
 
 dependencies {
     constraints {
-        implementation("at.yawk.lz4:lz4-java:1.11.2") {
+        implementation("at.yawk.lz4:lz4-java:1.11.3") {
             because("Fixes CVE-2026-59949 in the kafka-clients transitive dependency")
         }
     }
