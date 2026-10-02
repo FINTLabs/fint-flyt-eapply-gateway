@@ -30,6 +30,9 @@ patches:
       - op: replace
         path: "/spec/probes/liveness/path"
         value: "$LIVENESS_PATH"
+      - op: replace
+        path: "/spec/observability/metrics/path"
+        value: "$METRICS_PATH"
       - op: add
         path: "/spec/env/-"
         value:
