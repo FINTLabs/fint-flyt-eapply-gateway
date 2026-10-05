@@ -169,7 +169,7 @@ Start Kafka på `localhost:9092`:
 docker compose up -d
 ```
 
-Legg til `--profile tools` for å også starte Kafdrop på http://localhost:19000. `docker compose down -v` stopper alt og sletter dataene.
+Legg til `--profile tools` for å også starte Kafdrop på http://localhost:19000. Topicene er tomme ved hver oppstart.
 
 For lokal staging-konfigurasjon:
 
