@@ -163,6 +163,14 @@ Applikasjonen krever Java 25.
 ./gradlew bootRun
 ```
 
+Start Kafka på `localhost:9092`:
+
+```bash
+docker compose up -d
+```
+
+Legg til `--profile tools` for å også starte Kafdrop på http://localhost:19000. `docker compose down -v` stopper alt og sletter dataene.
+
 For lokal staging-konfigurasjon:
 
 ```bash
