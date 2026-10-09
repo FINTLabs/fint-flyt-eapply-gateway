@@ -72,6 +72,7 @@ for org_slug in "${ORG_SLUGS[@]}"; do
     export STARTUP_PATH="${base_path}/actuator/health"
     export READINESS_PATH="${base_path}/actuator/health/readiness"
     export LIVENESS_PATH="${base_path}/actuator/health/liveness"
+    export METRICS_PATH="${base_path}/actuator/prometheus"
     export FINT_KAFKA_TOPIC_ORGID="$org_slug"
     target_dir="$ROOT/kustomize/overlays/$org_slug/$environment"
     mkdir -p "$target_dir"
