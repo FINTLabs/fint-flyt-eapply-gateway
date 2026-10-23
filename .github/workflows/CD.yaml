@@ -15,8 +15,8 @@ jobs:
                 [
                   {"org":"fintlabs-no","cluster":"aks-beta-fint-2021-11-23"},
                   {"org":"agderfk-no","cluster":"aks-api-fint-2022-02-08"},
-                  {"org":"agderfk-no","cluster":"aks-beta-fint-2021-11-23"}
-                  {"org":"vlfk-no","cluster":"aks-api-fint-2022-02-08"}
+                  {"org":"agderfk-no","cluster":"aks-beta-fint-2021-11-23"},
+                  {"org":"vlfk-no","cluster":"aks-api-fint-2022-02-08"},
                   {"org":"vlfk-no","cluster":"aks-beta-fint-2021-11-23"}
                 ]
         secrets: inherit
