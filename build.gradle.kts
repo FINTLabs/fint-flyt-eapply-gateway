@@ -2,6 +2,7 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
+    configurations.classpath { resolutionStrategy.activateDependencyLocking() }
     repositories {
         gradlePluginPortal()
     }
@@ -54,6 +55,10 @@ extra["httpcore5.version"] = "5.4.4"
 extra["jackson-bom.version"] = "2.22.4"
 extra["log4j2.version"] = "2.26.1"
 extra["tomcat.version"] = "10.1.59"
+
+dependencyLocking {
+    lockAllConfigurations()
+}
 
 dependencies {
     constraints {
