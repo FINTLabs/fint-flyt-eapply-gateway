@@ -81,7 +81,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocOpenApiVersion")
 
-    implementation("no.novari:flyt-gateway-starter:4.2.0")
+    implementation("no.novari:flyt-gateway-starter:4.3.0")
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 
