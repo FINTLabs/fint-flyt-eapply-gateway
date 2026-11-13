@@ -218,6 +218,8 @@ Viktige konfigurasjonsområder:
 - `novari.flyt.file-service-url` for Flyt file service.
 - `novari.flyt.web-resource-server.security.api.external.*` for ekstern API-sikkerhet.
 - `fint.sso.client-id` og `fint.sso.client-secret` for OAuth2-klient mot file service.
+- `fint.flyt.authorization.sso.client-id` og `fint.flyt.authorization.sso.client-secret` for interne FLYT-kall
+  (`fint-flyt-authorization-oauth2-client`) mot intgr-conf-service, history-service og authorization-service.
 
 ## Deployment
 
