@@ -182,7 +182,11 @@ For lokal staging-konfigurasjon:
 - `server.port=8110`
 - `spring.kafka.bootstrap-servers=localhost:9092`
 - `novari.flyt.file-service-url=http://localhost:8091`
+- `novari.flyt.history-service-url=http://localhost:8083`
+- `novari.flyt.web-resource-server.security.authorization.base-url=http://localhost:8086`
 - `novari.kafka.topic.org-id=novari-no`
+
+API-kall autoriseres mot `fint-flyt-authorization-service` på port 8086, og statusendepunktet slår opp arkiv-ID-en i `fint-flyt-history-service` på port 8083. Kjør begge lokalt. Gatewayen henter token for disse kallene fra NAM, så sett `FINT_FLYT_AUTHORIZATION_SSO_CLIENT_ID` og `FINT_FLYT_AUTHORIZATION_SSO_CLIENT_SECRET` til `fint-flyt-authorization-oauth2-client` fra et beta-namespace, og start begge tjenestene med `fint.flyt.authorization.sso.client-id` satt til samme klient-ID, slik at tokenet godtas.
 
 ## Bygg og test
 
@@ -218,6 +222,8 @@ Viktige konfigurasjonsområder:
 - `novari.flyt.file-service-url` for Flyt file service.
 - `novari.flyt.web-resource-server.security.api.external.*` for ekstern API-sikkerhet.
 - `fint.sso.client-id` og `fint.sso.client-secret` for OAuth2-klient mot file service.
+- `fint.flyt.authorization.sso.client-id` og `fint.flyt.authorization.sso.client-secret` for interne FLYT-kall
+  (`fint-flyt-authorization-oauth2-client`) mot intgr-conf-service, history-service og authorization-service.
 
 ## Deployment
 

@@ -1,6 +1,6 @@
 package no.novari.flyt.eapply.gateway.instance
 
-import no.novari.flyt.gateway.instance.kafka.ArchiveCaseIdRequestService
+import no.novari.flyt.gateway.instance.HistoryClient
 import no.novari.flyt.webresourceserver.security.client.sourceapplication.SourceApplicationAuthorizationService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
@@ -12,23 +12,23 @@ import org.springframework.security.core.Authentication
 
 class EapplyCaseStatusServiceTest {
     private val sourceApplicationAuthorizationService = mock(SourceApplicationAuthorizationService::class.java)
-    private val archiveCaseIdRequestService = mock(ArchiveCaseIdRequestService::class.java)
+    private val historyClient = mock(HistoryClient::class.java)
     private val authentication = mock(Authentication::class.java)
     private val service =
         EapplyCaseStatusService(
             sourceApplicationAuthorizationService = sourceApplicationAuthorizationService,
-            archiveCaseIdRequestService = archiveCaseIdRequestService,
+            historyClient = historyClient,
         )
 
     @Test
     fun `returns archive case id for source application instance`() {
         `when`(sourceApplicationAuthorizationService.getSourceApplicationId(authentication)).thenReturn(42L)
-        `when`(archiveCaseIdRequestService.getArchiveCaseId(42L, "instance-123")).thenReturn("2026/456")
+        `when`(historyClient.getArchiveInstanceId(42L, "instance-123")).thenReturn("2026/456")
 
         val result = service.getCaseStatus(authentication, "instance-123")
 
         assertEquals("2026/456", result?.archiveCaseId)
-        verify(archiveCaseIdRequestService).getArchiveCaseId(42L, "instance-123")
+        verify(historyClient).getArchiveInstanceId(42L, "instance-123")
     }
 
     @Test
